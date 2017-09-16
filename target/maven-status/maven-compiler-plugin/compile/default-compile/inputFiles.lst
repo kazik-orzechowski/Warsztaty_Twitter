@@ -1,0 +1,10 @@
+/home/kaz/eclipse-workspace/Twitter/src/main/java/pl/twitter/controller/MainController.java
+/home/kaz/eclipse-workspace/Twitter/src/main/java/pl/twitter/entity/User.java
+/home/kaz/eclipse-workspace/Twitter/src/main/java/pl/twitter/entity/Tweet.java
+/home/kaz/eclipse-workspace/Twitter/src/main/java/pl/twitter/converter/UserConverter.java
+/home/kaz/eclipse-workspace/Twitter/src/main/java/pl/twitter/controller/TweetController.java
+/home/kaz/eclipse-workspace/Twitter/src/main/java/pl/twitter/controller/RegistrationAndLoginController.java
+/home/kaz/eclipse-workspace/Twitter/src/main/java/pl/twitter/repository/TweetRepository.java
+/home/kaz/eclipse-workspace/Twitter/src/main/java/pl/twitter/app/AppInitializer.java
+/home/kaz/eclipse-workspace/Twitter/src/main/java/pl/twitter/app/AppConfig.java
+/home/kaz/eclipse-workspace/Twitter/src/main/java/pl/twitter/repository/UserRepository.java
