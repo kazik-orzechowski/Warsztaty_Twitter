@@ -2,6 +2,7 @@ package pl.twitter.entity;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -23,7 +25,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Tweet {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotNull 
 	@Length(min = 5, max = 50) //, message = "Niepoprawna dlugosc tytulu")
@@ -34,10 +36,16 @@ public class Tweet {
 	private Date created;
 	@ManyToOne
 	private User user;
-	@OneToOne
-	private Comment comment;
+	@OneToMany (mappedBy = "tweet",  cascade=CascadeType.ALL)
+	private List<Comment> comment;
 
 	
+	public List<Comment> getComment() {
+		return comment;
+	}
+	public void setComment(List<Comment> comment) {
+		this.comment = comment;
+	}
 	public Long getId() {
 		return id;
 	}

@@ -7,8 +7,8 @@
 	<body>
 <h1>Twitter</h1>
 <h4>Version 1.0</h4>
-<p><a href="http://localhost:8080/Twitter/users/signup">Sign up page</a></p>
-<p><a href="http://localhost:8080/Twitter/users/login">Sign in page</a></p>
+<p><a href="http://localhost:8080/Twitter/user/signup">Sign up</a></p>
+<p><a href="http://localhost:8080/Twitter/user/login">Sign in</a></p>
 
 </body>
 </html>

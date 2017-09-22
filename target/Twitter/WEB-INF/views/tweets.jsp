@@ -5,18 +5,19 @@
 <%@	taglib	prefix="form" uri="http://www.springframework.org/tags/form"	%>
 <%@ page isELIgnored="false" %> <!--  to sie dodaje gdy wąsy wyświetlają się na stronie www -->
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-
+<%@	taglib	prefix="form"
+				uri="http://www.springframework.org/tags/form"	%>  
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<%@	taglib	prefix="form"
-				uri="http://www.springframework.org/tags/form"	%>    
+  
 
 <title>Tweets ${currentUser.username}</title>
 </head>
 <body>
 <h2>Homepage of ${currentUser.username} </h2>
-<p><p> <a href="http://localhost:8080/Twitter/users/logout">Log Out</a> </p>
+<p> <a href="http://localhost:8080/Twitter/user/logout">Log Out</a> </p>
+<p> <a href="http://localhost:8080/Twitter/contact/${currentUser.id}/all">Your contacts</a> </p>
 <h5>Tweet if you want:</h5>
 <form:form method="post" modelAttribute="tweet">
 	

@@ -30,62 +30,73 @@ public class TweetController {
 	private TweetRepository repoTweet;
 	@Autowired
 	private UserRepository repoUser;
-	
-	
-//	@GetMapping("/{id}")
-//	public String tweets(@PathVariable Long id, Model model) {
-//		model.addAttribute("allTweets", repoTweet.findByUserId(id));
-//		return "tweets";
-//	}
+
+	// @GetMapping("/{id}")
+	// public String tweets(@PathVariable Long id, Model model) {
+	// model.addAttribute("allTweets", repoTweet.findByUserId(id));
+	// return "tweets";
+	// }
 	@Transactional
 	@GetMapping("/{id}/add")
 	public String addTweet(@PathVariable Long id, Model model) {
 		Tweet tweet = new Tweet();
-		User user = repoUser.findOne(id);
-//		user.setId(id);
-//		tweet.setUser(user);
 		
+				
+		System.err.println(tweet.toString());
+		
+		User user = repoUser.findOne(id);
 		Hibernate.initialize(user.getTweets());
 		model.addAttribute("allTweets", repoTweet.findByUser(user));
-		System.out.println(repoTweet.findAll());
 		model.addAttribute("currentUser", user);
 		model.addAttribute("tweet", tweet);
 		return "tweets";
 	}
-	
+
 	@Transactional
 	@PostMapping("/{id}/add")
 	public String addTweet2(@PathVariable Long id, @Valid Tweet tweet, BindingResult result, Model model) {
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "tweets";
 		}
 		Hibernate.initialize(repoUser.getOne(id).getTweets());
+		System.err.println("post" + tweet.toString());
 		tweet.setUser(repoUser.getOne(id));
-//		DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Date date= new Date();
+		// DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
 		tweet.setCreated(date);
 		repoTweet.save(tweet);
-		return "redirect: /Twitter/tweet/"+id+"/add"; 
-//		
-//		model.addAttribute("allTweets", repoTweet.findByUser(tweet.getUser()));
-//		model.addAttribute("currentUser", tweet.getUser());
-//		Tweet emptyTweet = new Tweet();
-//		model.addAttribute("tweet", emptyTweet);
-//		return "tweets";
-//		
+		return "redirect: /Twitter/tweet/" + id + "/add";
+		//
+		// model.addAttribute("allTweets", repoTweet.findByUser(tweet.getUser()));
+		// model.addAttribute("currentUser", tweet.getUser());
+		// Tweet emptyTweet = new Tweet();
+		// model.addAttribute("tweet", emptyTweet);
+		// return "tweets";
+		//
 	}
-	
+
 	@GetMapping("/{id}/delete/{tweetId}")
 	public String delTweet(@PathVariable Long id, @PathVariable Long tweetId, Model model) {
 		repoTweet.delete(tweetId);
-		return "redirect: /Twitter/tweet/"+id+"/add"; 
+		return "redirect: /Twitter/tweet/" + id + "/add";
 	}
-	
+
 	@GetMapping("/{id}/details/{tweetId}")
 	public String detailedTweet(@PathVariable Long id, @PathVariable Long tweetId, Model model) {
 		model.addAttribute("tweet", repoTweet.findOne(tweetId));
 		model.addAttribute("currentUser", repoUser.findOne(id));
-		return "tweetDetails"; 
+		return "tweetDetails";
 	}
-	
+	@Transactional
+	@GetMapping("/{id}/guestTweets/{idc}")
+	public String guestTweets(@PathVariable Long id, @PathVariable Long idc, Model model) {
+		User guestUser = repoUser.findOne(idc);
+		User hostUser = repoUser.findOne(id);
+		Hibernate.initialize(guestUser.getTweets());
+		model.addAttribute("guestTweets", repoTweet.findByUser(guestUser));
+		model.addAttribute("currentUser", hostUser);
+		model.addAttribute("guestUser", guestUser);
+		return "guestTweets";
+	}
+
 }

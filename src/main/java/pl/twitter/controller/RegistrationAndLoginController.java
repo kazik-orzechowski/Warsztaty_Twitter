@@ -22,7 +22,7 @@ import pl.twitter.repository.UserRepository;
 import pl.twitter.entity.User;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/user")
 
 public class RegistrationAndLoginController {
 

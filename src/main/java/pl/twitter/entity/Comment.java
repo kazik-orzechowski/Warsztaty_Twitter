@@ -6,41 +6,45 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name = "tweets")
+@Table(name = "comments")
 public class Comment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotNull
-	@Length(min = 1, max = 100) // , message = "Niepoprawna dlugosc tytulu")
-	private String post;
+	@Length(min = 1, max = 200, message = "Niepoprawna dlugosc postu")
+	private String comment_text;
+	@NotNull
 	private Date created;
+	@ManyToOne
 	private User user;
+	@ManyToOne
 	private Tweet tweet;
-
+	
+	
+	
 	public Comment() {
 
 	}
 
-	public Comment(String post, Date created, User user, Tweet tweet) {
+	
+	
+	public Comment(String comment_text, Date created) {
 		super();
-		this.post = post;
+		this.comment_text = comment_text;
 		this.created = created;
-		this.user = user;
-		this.tweet = tweet;
 	}
 
-	@Override
-	public String toString() {
-		return "Comment [id=" + id + ", post=" + post + ", created=" + created + "]";
-	}
+
 
 	public Long getId() {
 		return id;
@@ -50,12 +54,12 @@ public class Comment {
 		this.id = id;
 	}
 
-	public String getPost() {
-		return post;
+	public String getComment_text() {
+		return comment_text;
 	}
 
-	public void setPost(String post) {
-		this.post = post;
+	public void setComment_text(String comment_text) {
+		this.comment_text = comment_text;
 	}
 
 	public Date getCreated() {
@@ -82,4 +86,10 @@ public class Comment {
 		this.tweet = tweet;
 	}
 
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", comment_text=" + comment_text + ", created=" + created + "]";
+	}
+
+	
 }
