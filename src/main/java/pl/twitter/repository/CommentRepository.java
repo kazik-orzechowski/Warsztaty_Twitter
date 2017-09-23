@@ -18,5 +18,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 //	@Query("SELECT c FROM Comment c WHERE user = ?1")
 //	 List<Comment> findByUser(User user);   
 	
+	List<Comment> findAllByTweetId (Long id);
+	Comment findTop1ByOrderByIdDesc();
 	
 }

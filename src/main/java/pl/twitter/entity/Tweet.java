@@ -29,7 +29,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Tweet {
 
 	/**
-	 * Tweet id auto generated
+	 * Tweet id generated during adding new tweets (TweetController)
 	 */
 	@Id
 	private Long id;

@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pl.twitter.entity.Comment;
 import pl.twitter.entity.Contact;
 import pl.twitter.entity.Tweet;
 import pl.twitter.entity.User;
+import pl.twitter.repository.CommentRepository;
 import pl.twitter.repository.ContactRepository;
 import pl.twitter.repository.TweetRepository;
 import pl.twitter.repository.UserRepository;
@@ -36,20 +38,14 @@ public class TweetController {
 	private UserRepository repoUser;
 	@Autowired
 	private ContactRepository repoContact;
+	@Autowired
+	private CommentRepository repoComment;
 
-	
-	
-	// @GetMapping("/{id}")
-	// public String tweets(@PathVariable Long id, Model model) {
-	// model.addAttribute("allTweets", repoTweet.findByUserId(id));
-	// return "tweets";
-	// }
-	@Transactional
+		@Transactional
 	@GetMapping("/{id}/add")
 	public String addTweet(@PathVariable Long id, Model model) {
 		Tweet tweet = new Tweet();
-		
-				
+					
 		System.err.println(tweet.toString());
 		
 		User user = repoUser.findOne(id);
@@ -112,6 +108,96 @@ public class TweetController {
 	@GetMapping("/{id}/guestTweets")
 	public String guestTweets(@PathVariable Long id, Model model) {
 		
+		List<Tweet> followedTweets = defineFollowedTweets(id);
+		
+		User hostUser = initializeTweets(id, followedTweets);
+
+		model.addAttribute("guestTweets", followedTweets);
+		model.addAttribute("currentUser", hostUser);
+		model.addAttribute("inputDisplayNumber", 0);
+		model.addAttribute("displayNumber", 0);		
+		return "allGuestsTweets";
+	}
+
+		
+	@Transactional
+	@GetMapping("/{id}/comment/{idt}/post")
+	public String addComment(@PathVariable Long id,@PathVariable Long idt, Model model) {
+		Comment comment = new Comment();
+		
+		List<Tweet> followedTweets = defineFollowedTweets(id);
+		User hostUser = initializeTweets(id, followedTweets);
+		
+		model.addAttribute("guestTweets", followedTweets);
+		model.addAttribute("currentUser", hostUser);
+		model.addAttribute("inputDisplayNumber", idt);
+		model.addAttribute("comment", comment);
+		return "allGuestsTweets";
+	}
+
+	@Transactional
+	@PostMapping("/{id}/comment/{idt}/post")
+	public String addCommentPost(@PathVariable Long id, @PathVariable Long idt, 
+					@Valid Comment comment, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "allGuestsTweets";
+		}
+		Hibernate.initialize(repoUser.getOne(id).getTweets());
+		Date date = new Date();
+		comment.setCreated(date);
+		comment.setTweet(repoTweet.getOne(idt));
+		comment.setUser(repoUser.getOne(id));
+		comment.setId(1L + repoComment.findTop1ByOrderByIdDesc().getId());
+		repoComment.save(comment);
+		List<Tweet> followedTweets = defineFollowedTweets(id);
+		User hostUser = initializeTweets(id, followedTweets);
+		
+		model.addAttribute("guestTweets", followedTweets);
+		model.addAttribute("currentUser", hostUser);
+		model.addAttribute("inputDisplayNumber", 0);
+		model.addAttribute("displayNumber", idt);
+		model.addAttribute("tweetComments", repoComment.findAllByTweetId(idt));
+		model.addAttribute("comment", comment);
+		return "allGuestsTweets";
+
+	}	
+	
+	@Transactional
+	@GetMapping("/{id}/comment/{idt}/show")
+	public String showComments(@PathVariable Long id,@PathVariable Long idt, Model model) {
+		
+		List<Tweet> followedTweets = defineFollowedTweets(id);
+		User hostUser = initializeTweets(id, followedTweets);
+		
+		model.addAttribute("guestTweets", followedTweets);
+		model.addAttribute("currentUser", hostUser);
+		model.addAttribute("inputDisplayNumber", 0);
+		model.addAttribute("displayNumber", idt);
+		model.addAttribute("tweetComments", repoComment.findAllByTweetId(idt));
+		return "allGuestsTweets";
+	}
+	
+	/**
+	 * Initialization of comments for each tweet
+	 * @param id
+	 * @param followedTweets
+	 * @return host user with tweets initialized 
+	 */
+	
+	private User initializeTweets(Long id, List<Tweet> followedTweets) {
+		User hostUser = repoUser.findOne(id);
+		for(Tweet tweet : followedTweets) {
+			Hibernate.initialize(tweet.getComment());
+		}
+		return hostUser;
+	}
+
+	/**
+	 * Method defining list of tweets to be displayed
+	 * @param id
+	 * @return list of all tweets of all followed (guest) users followed by host user
+	 */
+	private List<Tweet> defineFollowedTweets(Long id) {
 		List<Contact> myFollowedContacts = repoContact.findAllByHostIdAndStatus(id, 2);
 		List<User> followedUsers = new ArrayList<User>();
 		for(Contact contact : myFollowedContacts) {
@@ -120,14 +206,9 @@ public class TweetController {
 			
 		List<Tweet> followedTweets = 
 				repoTweet.findTweetsOfUsersFollowedByMeOrderDesc(followedUsers);
-		User hostUser = repoUser.findOne(id);
-		for(Tweet tweet : followedTweets) {
-			Hibernate.initialize(tweet.getComment());
-		}
-
-		model.addAttribute("guestTweets", followedTweets);
-		model.addAttribute("currentUser", hostUser);
-		return "allGuestsTweets";
+		return followedTweets;
 	}
+	
+
 	
 }

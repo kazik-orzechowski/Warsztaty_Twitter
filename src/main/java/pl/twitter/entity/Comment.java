@@ -23,22 +23,20 @@ import org.hibernate.validator.constraints.Length;
 public class Comment {
 
 	/**
-	 * Comment id auto generated
+	 * Comment id generated in Tweeter Controller 
 	 */
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	/**
 	 * Comment text min = 1, max = 400
 	 */
 	@NotNull
-	@Length(min = 1, max = 400, message = "Niepoprawna dlugosc postu")
+	@Length(min = 1, max = 400)
 	private String comment_text;
 	/**
 	 * Date of comment creation
 	 */
-	@NotNull
 	private Date created;
 	
 	/**
