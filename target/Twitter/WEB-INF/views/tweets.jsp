@@ -16,8 +16,9 @@
 </head>
 <body>
 <h2>Homepage of ${currentUser.username} </h2>
-<p> <a href="http://localhost:8080/Twitter/user/logout">Log Out</a> </p>
-<p> <a href="http://localhost:8080/Twitter/contact/${currentUser.id}/all">Your contacts</a> </p>
+<p> <a href="http://localhost:8080/Twitter/user/logout">Log Out</a><br/>
+<a href="http://localhost:8080/Twitter/contact/${currentUser.id}/all">Your contacts</a> <br/>
+<a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/guestTweets">Followed tweets</a></p>
 <h5>Tweet if you want:</h5>
 <form:form method="post" modelAttribute="tweet">
 	

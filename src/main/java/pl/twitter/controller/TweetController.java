@@ -2,7 +2,9 @@ package pl.twitter.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pl.twitter.entity.Contact;
 import pl.twitter.entity.Tweet;
 import pl.twitter.entity.User;
+import pl.twitter.repository.ContactRepository;
 import pl.twitter.repository.TweetRepository;
 import pl.twitter.repository.UserRepository;
 
@@ -30,7 +34,11 @@ public class TweetController {
 	private TweetRepository repoTweet;
 	@Autowired
 	private UserRepository repoUser;
+	@Autowired
+	private ContactRepository repoContact;
 
+	
+	
 	// @GetMapping("/{id}")
 	// public String tweets(@PathVariable Long id, Model model) {
 	// model.addAttribute("allTweets", repoTweet.findByUserId(id));
@@ -64,6 +72,7 @@ public class TweetController {
 		// DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		tweet.setCreated(date);
+		tweet.setId(1L + repoTweet.findTop1ByOrderByIdDesc().getId());
 		repoTweet.save(tweet);
 		return "redirect: /Twitter/tweet/" + id + "/add";
 		//
@@ -99,4 +108,26 @@ public class TweetController {
 		return "guestTweets";
 	}
 
+	@Transactional
+	@GetMapping("/{id}/guestTweets")
+	public String guestTweets(@PathVariable Long id, Model model) {
+		
+		List<Contact> myFollowedContacts = repoContact.findAllByHostIdAndStatus(id, 2);
+		List<User> followedUsers = new ArrayList<User>();
+		for(Contact contact : myFollowedContacts) {
+			followedUsers.add(contact.getGuest());
+		}
+			
+		List<Tweet> followedTweets = 
+				repoTweet.findTweetsOfUsersFollowedByMeOrderDesc(followedUsers);
+		User hostUser = repoUser.findOne(id);
+		for(Tweet tweet : followedTweets) {
+			Hibernate.initialize(tweet.getComment());
+		}
+
+		model.addAttribute("guestTweets", followedTweets);
+		model.addAttribute("currentUser", hostUser);
+		return "allGuestsTweets";
+	}
+	
 }

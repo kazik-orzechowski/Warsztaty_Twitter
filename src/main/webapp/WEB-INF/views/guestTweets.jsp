@@ -24,11 +24,9 @@
 
 <c:forEach items="${guestTweets}" var="item">
 	<p><b>${item.title}</b><small>     ${item.created}</small><br />
-	${item.tweet_text}<br />
-	<br /></p>
-	<p><a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/comment/${item.id}">Comment</a></p>
+	${item.tweet_text}     <a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/comment/${item.id}">Comment</a></p>
 	
-	</c:forEach>
+</c:forEach>
 
 </body>
 </html>

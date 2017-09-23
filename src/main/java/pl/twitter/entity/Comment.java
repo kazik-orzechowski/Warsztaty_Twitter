@@ -12,31 +12,60 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+/**
+ * Entity class for comments to tweets
+ * @author kaz
+ *
+ */
 
 @Entity
 @Table(name = "comments")
 public class Comment {
 
+	/**
+	 * Comment id auto generated
+	 */
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	/**
+	 * Comment text min = 1, max = 400
+	 */
 	@NotNull
-	@Length(min = 1, max = 200, message = "Niepoprawna dlugosc postu")
+	@Length(min = 1, max = 400, message = "Niepoprawna dlugosc postu")
 	private String comment_text;
+	/**
+	 * Date of comment creation
+	 */
 	@NotNull
 	private Date created;
+	
+	/**
+	 * User that posted a comment
+	 */
 	@ManyToOne
 	private User user;
+	
+	/**
+	 * Tweet that comment refers to
+	 */
 	@ManyToOne
 	private Tweet tweet;
 	
-	
+	/**
+	 * Empty comment constructor
+	 */
 	
 	public Comment() {
 
 	}
 
-	
+	/**
+	 * Comment constructor from fields
+	 * @param comment_text
+	 * @param created
+	 */
 	
 	public Comment(String comment_text, Date created) {
 		super();
@@ -86,6 +115,9 @@ public class Comment {
 		this.tweet = tweet;
 	}
 
+	/**
+	 * Comment to String method, returns Comment general description
+	 */
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", comment_text=" + comment_text + ", created=" + created + "]";

@@ -6,7 +6,7 @@
     pageEncoding="UTF-8"%>
 
 <%@	taglib	prefix="form" uri="http://www.springframework.org/tags/form"	%>
-<%@ page isELIgnored="false" %> <!--  to sie dodaje gdy wąsy wyświetlają się na stronie www -->
+<%@ page isELIgnored="false" %> 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,18 +15,19 @@
 <%@	taglib	prefix="form"
 				uri="http://www.springframework.org/tags/form"	%>    
 
-<title>Tweets ${guestUser.username}</title>
+<title>Followed tweets</title>
 
 <body>
 <p><a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/add">Your homepage </a><br/>
 <a href="http://localhost:8080/Twitter/user/logout">Log Out</a> </p>
-<h5>Tweets of ${guestUser.username}</h5>
+<h5>All tweets followed by ${currentUser.username}</h5>
 
 <c:forEach items="${guestTweets}" var="item">
-	<p><b>${item.title}</b><small>     ${item.created}</small><br />
+	<c:out value="${item.user.username}"></c:out> <br/>
+	<b>${item.title}</b><small>     ${item.created}</small><br />
 	${item.tweet_text}     <a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/comment/${item.id}">Comment</a></p>
-	
-</c:forEach>
+</c:forEach>	
+
 
 </body>
 </html>

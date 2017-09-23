@@ -11,5 +11,6 @@ public interface ContactRepository extends JpaRepository<Contact, Long> {
 	List<Contact> findAllByHostId(Long id);
 	List<Contact> findAllByGuestId(Long id);
 	Contact findOneByHostIdAndGuestId (Long idh, Long idg);
+	List<Contact> findAllByHostIdAndStatus(Long id, int status);
 
 }

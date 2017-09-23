@@ -18,64 +18,144 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
+/**
+ * Entity class that serves to create and modification of tweets posted by users
+ * @author kaz
+ *
+ */
 
 @Entity
 @Table (name = "tweets")
 public class Tweet {
 
+	/**
+	 * Tweet id auto generated
+	 */
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
+	/**
+	 * Tweet title
+	 */
 	@NotNull 
-	@Length(min = 5, max = 50) //, message = "Niepoprawna dlugosc tytulu")
+	@Length(min = 5, max = 50) 
 	private String title;
+	/**
+	 * Tweet text
+	 */
 	@NotNull
 	@Length(min=1, max=160)
 	private String tweet_text;
+	/**
+	 * Tweet creation date
+	 */
 	private Date created;
+	/**
+	 * User that created this tweet
+	 */
 	@ManyToOne
 	private User user;
+	/**
+	 * List of comments posted to this tweets by users
+	 */
 	@OneToMany (mappedBy = "tweet",  cascade=CascadeType.ALL)
 	private List<Comment> comment;
 
+	/**
+	 * Getter
+	 * @return list of comments posted to this tweet by users
+	 */
 	
 	public List<Comment> getComment() {
 		return comment;
 	}
+	
+	/**
+	 * Sets list of comments posted to this tweet by users
+	 * @param comment
+	 */
 	public void setComment(List<Comment> comment) {
 		this.comment = comment;
 	}
+	/**
+	 * Getter
+	 * @return id of this tweet
+	 */
 	public Long getId() {
 		return id;
 	}
+	/**
+	 * Sets id of this tweet
+	 * @param id
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	/**
+	 * Getter
+	 * @return title of this tweet
+	 */
 	public String getTitle() {
 		return title;
 	}
+	
+	/**
+	 * Sets title of this tweet
+	 * @param title
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	/**
+	 * Getter
+	 * @return text of this tweet
+	 */
 	public String getTweet_text() {
 		return tweet_text;
 	}
+	/**
+	 * Sets text of this tweet
+	 * @param tweet_text
+	 */
 	public void setTweet_text(String tweet_text) {
 		this.tweet_text = tweet_text;
 	}
+	/**
+	 * Getter
+	 * @return this tweet date of creation
+	 */
 	public Date getCreated() {
 		return created;
 	}
+	
+	/**
+	 * Sets date of this tweet creation
+	 * @param created
+	 */
 	public void setCreated(Date created) {
 		this.created = created;
 	}
+	/**
+	 * Getter
+	 * @return user that created this tweet
+	 */
 	public User getUser() {
 		return user;
 	}
+	/**
+	 * Sets user that created this tweet
+	 * @param user
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
+	/**
+	 * Constructor using four parameters to define new tweet
+	 * @param title
+	 * @param tweet_text
+	 * @param created
+	 * @param user
+	 */
 	public Tweet(String title, String tweet_text, Date created, User user) {
 		super();
 		this.title = title;
@@ -83,12 +163,18 @@ public class Tweet {
 		this.created = created;
 		this.user = user;
 	}
-	
+	/**
+	 * To string method using all fields of new tweet
+	 */
 	@Override
 	public String toString() {
 		return "Tweet [id=" + id + ", title=" + title + ", tweet_text=" + tweet_text + ", created=" + created
 				+ ", user=" + user + "]";
 	}
+	
+	/**
+	 * Empty constructor of new tweet
+	 */
 	public Tweet() {
 		
 	}
