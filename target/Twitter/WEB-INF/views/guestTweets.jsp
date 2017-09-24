@@ -15,12 +15,12 @@
 <%@	taglib	prefix="form"
 				uri="http://www.springframework.org/tags/form"	%>    
 
-<title>Tweets ${guestUser.username}</title>
+<title>Tweets @${guestUser.username}</title>
 
 <body>
 <p><a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/add">Your homepage </a><br/>
 <a href="http://localhost:8080/Twitter/user/logout">Log Out</a> </p>
-<h5>Tweets of ${guestUser.username}</h5>
+<h5>Tweets of @${guestUser.username}</h5>
 
 <c:forEach items="${guestTweets}" var="item">
 	<p><b>${item.title}</b><small>     ${item.created}</small><br />

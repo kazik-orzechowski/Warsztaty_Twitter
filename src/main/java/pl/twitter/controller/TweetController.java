@@ -68,16 +68,13 @@ public class TweetController {
 		// DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		tweet.setCreated(date);
-		tweet.setId(1L + repoTweet.findTop1ByOrderByIdDesc().getId());
+		if (repoTweet.findTop1ByOrderByIdDesc() == null) {
+			tweet.setId(1L);
+		} else { 
+			tweet.setId(1L + repoTweet.findTop1ByOrderByIdDesc().getId());
+		}
 		repoTweet.save(tweet);
 		return "redirect: /Twitter/tweet/" + id + "/add";
-		//
-		// model.addAttribute("allTweets", repoTweet.findByUser(tweet.getUser()));
-		// model.addAttribute("currentUser", tweet.getUser());
-		// Tweet emptyTweet = new Tweet();
-		// model.addAttribute("tweet", emptyTweet);
-		// return "tweets";
-		//
 	}
 
 	@GetMapping("/{id}/delete/{tweetId}")
@@ -106,7 +103,7 @@ public class TweetController {
 
 	@Transactional
 	@GetMapping("/{id}/guestTweets")
-	public String guestTweets(@PathVariable Long id, Model model) {
+	public String allGuestsTweets(@PathVariable Long id, Model model) {
 		
 		List<Tweet> followedTweets = defineFollowedTweets(id);
 		
@@ -147,7 +144,11 @@ public class TweetController {
 		comment.setCreated(date);
 		comment.setTweet(repoTweet.getOne(idt));
 		comment.setUser(repoUser.getOne(id));
+		if(repoComment.findTop1ByOrderByIdDesc() == null) {
+			comment.setId(1L);
+		} else { 		
 		comment.setId(1L + repoComment.findTop1ByOrderByIdDesc().getId());
+		}
 		repoComment.save(comment);
 		List<Tweet> followedTweets = defineFollowedTweets(id);
 		User hostUser = initializeTweets(id, followedTweets);

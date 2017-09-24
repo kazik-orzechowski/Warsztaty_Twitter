@@ -35,10 +35,9 @@
 </form:form>
 
 <c:forEach items="${allTweets}" var="item">
-	<p><b>${item.title}</b><small>     ${item.created}</small><br />
-	${item.tweet_text}<br />
-	<br /></p>
-	<p> <a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/details/${item.id}">Details</a> 
+	<p><b>${item.title}</b><small>&nbsp;&nbsp;${item.created}</small><br />
+	${item.tweet_text}&nbsp;&nbsp;&nbsp;
+	<a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/details/${item.id}">Details</a> 
 	<a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/delete/${item.id}">Delete </a></p>	
 </c:forEach>
 

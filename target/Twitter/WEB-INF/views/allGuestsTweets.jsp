@@ -19,12 +19,12 @@
 
 
 <body>
-<h2>Tweets of users followed by ${currentUser.username} </h2>
+<h2>Tweets of users followed by @${currentUser.username} </h2>
 <p><a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/add">Your homepage </a><br/>
 <a href="http://localhost:8080/Twitter/user/logout">Log Out</a> </p>
 
 <c:forEach items="${guestTweets}" var="item">
-	<u><c:out value="${item.user.username}"></c:out></u> <br/>
+	<u>@<c:out value="${item.user.username}"></c:out></u> <br/>
 	<b>${item.title}</b><small>     ${item.created}</small><br />
 	${item.tweet_text}     <a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/comment/${item.id}/post">Post a comment</a>
 	<a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/comment/${item.id}/show">Show comments</a></p>
@@ -33,8 +33,8 @@
 	<c:choose>
 	    <c:when test="${displayNumber == tweetNumber}">
 			<c:forEach items="${tweetComments}" var="comment">  
-				<p><u>&nbsp;&nbsp;&nbsp;${comment.user.username }</u>  ${comment.comment_text }
-						<small> ${comment.created }</small></p>
+				<p>&nbsp;&nbsp;&nbsp;<small><u>@${comment.user.username }</u>  ${comment.comment_text }
+						<small> ${comment.created }</small></small></p>
 			</c:forEach>
 	    </c:when>
 	    <c:otherwise></c:otherwise>      

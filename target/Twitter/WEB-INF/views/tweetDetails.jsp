@@ -21,7 +21,7 @@
 	<p>Created by: ${currentUser.username}</p>
 	<p>Created on: ${tweet.created}</p>
 	<p>Text:       ${tweet.tweet_text}</p>
-	<p> <a href="http://localhost:8080/Twitter/tweet/${currentUser.id}">Return to tweets</a> 
+	<p> <a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/add">Return to tweets</a> 
 	<a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/delete/${tweet.id}">Delete </a></p>	
 </body>
 </html>
