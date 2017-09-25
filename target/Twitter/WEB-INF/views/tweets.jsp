@@ -15,7 +15,7 @@
 <title>Tweets ${currentUser.username}</title>
 </head>
 <body>
-<h2>Homepage of ${currentUser.username} </h2>
+<h2>Homepage of @${currentUser.username} </h2>
 <p> <a href="http://localhost:8080/Twitter/user/logout">Log Out</a><br/>
 <a href="http://localhost:8080/Twitter/contact/${currentUser.id}/all">Your contacts</a> <br/>
 <a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/guestTweets">Followed tweets</a></p>
@@ -34,6 +34,7 @@
 
 </form:form>
 
+<h5>Your tweets</h5>
 <c:forEach items="${allTweets}" var="item">
 	<p><b>${item.title}</b><small>&nbsp;&nbsp;${item.created}</small><br />
 	${item.tweet_text}&nbsp;&nbsp;&nbsp;

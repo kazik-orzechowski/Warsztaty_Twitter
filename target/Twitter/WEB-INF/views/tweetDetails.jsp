@@ -12,13 +12,13 @@
 <%@	taglib	prefix="form"
 				uri="http://www.springframework.org/tags/form"	%>    
 
-<title>Tweet ${currentUser.username}</title>
+<title>Tweet @${currentUser.username}</title>
 </head>
 <body>
 <h2>Tweet details  </h2>
 	
 	<p><b>${tweet.id}. ${tweet.title}</b></p>
-	<p>Created by: ${currentUser.username}</p>
+	<p>Created by: @${currentUser.username}</p>
 	<p>Created on: ${tweet.created}</p>
 	<p>Text:       ${tweet.tweet_text}</p>
 	<p> <a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/add">Return to tweets</a> 

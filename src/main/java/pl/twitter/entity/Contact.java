@@ -13,9 +13,11 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Range;
 
 /**
- * Entity class that serves to create objects defining reference between host user (logged in) 
- * and other (guest) user. Guest user reference is used to define status of users 
- * followed by host user (not followed, followed, banned) and to display their tweets. 
+ * Entity class that serves to create objects defining reference between host
+ * user (logged in) and other (guest) user. Guest user reference is used to
+ * define status of users followed by host user (not followed, followed, banned)
+ * and to display their tweets.
+ * 
  * @author kaz
  *
  */
@@ -32,19 +34,19 @@ public class Contact {
 	private Long id;
 
 	/**
-	 * Status of guest contact 1 - not connected, 2 - followed, 3 - banned
-	 * Default status is; not followed
+	 * Status of guest contact 1 - not connected, 2 - followed, 3 - banned Default
+	 * status is; not followed
 	 */
 	@NotNull
 	@Range(min = 1, max = 3)
 	private int status = 1;
-	
+
 	/**
 	 * Reference to origin contact user defined as host user
 	 */
 	@ManyToOne
 	private User host;
-	
+
 	/**
 	 * Reference to target contact user defined as guest user
 	 */
@@ -54,7 +56,7 @@ public class Contact {
 	/**
 	 * Empty constructor
 	 */
-	
+
 	public Contact() {
 		super();
 
@@ -62,21 +64,26 @@ public class Contact {
 
 	/**
 	 * Getter
+	 * 
 	 * @return unique auto generated contact id
 	 */
 	public Long getId() {
 		return id;
 	}
+
 	/**
 	 * Sets comment id
+	 * 
 	 * @param id
 	 */
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	/**
 	 * Getter
+	 * 
 	 * @return contact status: 1 - not connected, 2 - followed, 3 - banned
 	 */
 	public int getStatus() {
@@ -85,6 +92,7 @@ public class Contact {
 
 	/**
 	 * Sets contact status: 1 - not connected, 2 - followed, 3 - banned
+	 * 
 	 * @param status
 	 */
 	public void setStatus(int status) {
@@ -93,14 +101,16 @@ public class Contact {
 
 	/**
 	 * Getter
+	 * 
 	 * @return target contact user defined as guest user
 	 */
 	public User getGuest() {
 		return guest;
 	}
-	
+
 	/**
 	 * Sets target contact user defined as guest user
+	 * 
 	 * @param guest
 	 */
 	public void setGuest(User guest) {
@@ -109,6 +119,7 @@ public class Contact {
 
 	/**
 	 * Getter
+	 * 
 	 * @return origin contact user defined as host user
 	 */
 	public User getHost() {
@@ -117,6 +128,7 @@ public class Contact {
 
 	/**
 	 * Sets origin contact user defined as host user
+	 * 
 	 * @param host
 	 */
 	public void setHost(User host) {
@@ -125,6 +137,7 @@ public class Contact {
 
 	/**
 	 * Constructor with two parameters, used when status is default
+	 * 
 	 * @param host
 	 * @param guest
 	 */
@@ -133,9 +146,11 @@ public class Contact {
 		this.guest = guest;
 		this.host = host;
 	}
+
 	/**
-	 * Constructor using three parameters, used when contact status 
-	 * is defined when new contact object is being created
+	 * Constructor using three parameters, used when contact status is defined when
+	 * new contact object is being created
+	 * 
 	 * @param status
 	 * @param host
 	 * @param guest

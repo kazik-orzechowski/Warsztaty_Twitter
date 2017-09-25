@@ -9,16 +9,29 @@ import pl.twitter.entity.Comment;
 import pl.twitter.entity.Tweet;
 import pl.twitter.entity.User;
 
+/**
+ * Comment Jpa Repository
+ * 
+ * @author kaz
+ *
+ */
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-//	@Query("SELECT c FROM Comment t WHERE user.id = ?1")
-//	   List<Comment> findByUserId(Long id);   
-//	
-//	@Query("SELECT c FROM Comment c WHERE user = ?1")
-//	 List<Comment> findByUser(User user);   
-	
-	List<Comment> findAllByTweetId (Long id);
+	/**
+	 * Generates a list of comments that concern a tweet with a given id
+	 * 
+	 * @param id
+	 * @return list of comments for one tweet of given id
+	 */
+	List<Comment> findAllByTweetId(Long id);
+
+	/**
+	 * Identifies id used of the last comment created in comments table in twitter
+	 * database
+	 * 
+	 * @return id value of the last comment
+	 */
 	Comment findTop1ByOrderByIdDesc();
-	
+
 }

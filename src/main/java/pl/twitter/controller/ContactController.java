@@ -22,15 +22,36 @@ import pl.twitter.entity.User;
 import pl.twitter.repository.ContactRepository;
 import pl.twitter.repository.UserRepository;
 
+/**
+ * Contact controller used to manage all twitter user actions regarding contacts
+ * 
+ * @author kaz
+ *
+ */
 @Controller
 @RequestMapping("/contact")
 public class ContactController {
 
+	/**
+	 * Jpa repository reference to User class
+	 */
 	@Autowired
 	UserRepository repoUser;
-
+	/**
+	 * Jpa repository reference to Contact class
+	 */
 	@Autowired
 	ContactRepository repoContact;
+
+	/**
+	 * Method responsible for display user screen containing list of other (guest)
+	 * users with menu that makes it possible to set guest user status and see their
+	 * tweets
+	 * 
+	 * @param id
+	 * @param model
+	 * @return web page contacts.jsp
+	 */
 
 	@Transactional
 	@RequestMapping("/{id}/all")
@@ -44,11 +65,10 @@ public class ContactController {
 			Hibernate.initialize(guest.getContactsGuest());
 			Hibernate.initialize(guest.getContactsHost());
 			if (repoContact.findOneByHostIdAndGuestId(id, guest.getId()) == null) {
-				Contact addedContact = new Contact(host,guest);
+				Contact addedContact = new Contact(host, guest);
 				repoContact.save(addedContact);
 			}
 		}
-		// host user contact list
 		List<Contact> guests = repoContact.findAllByHostId(id);
 		List<GuestDTO> guestsData = new ArrayList<GuestDTO>();
 
@@ -75,91 +95,62 @@ public class ContactController {
 		return "contacts";
 	}
 
-	
-	 @GetMapping("/{id}/follow/{idc}")
-	 public String followContact (@PathVariable Long id, @PathVariable Long idc,
-	 Model model) {
-	
-	 Contact contact = repoContact.findOneByHostIdAndGuestId(id, idc);
-	 contact.setStatus(2);
-	 repoContact.save(contact);
-	 	
-	 return "redirect: /Twitter/contact/"+id+"/all";
-	 }
-	 
-	 @GetMapping("/{id}/ban/{idc}")
-	 public String banContact (@PathVariable Long id, @PathVariable Long idc,
-	 Model model) {
-	
-	 Contact contact = repoContact.findOneByHostIdAndGuestId(id, idc);
-	 contact.setStatus(3);
-	 repoContact.save(contact);
-	 	
-	 return "redirect: /Twitter/contact/"+id+"/all";
-	 }
-	 
-	 
-	 @GetMapping("/{id}/stopFollow/{idc}")
-	 public String stopFollowContact (@PathVariable Long id, @PathVariable Long idc,
-	 Model model) {
-	
-	 Contact contact = repoContact.findOneByHostIdAndGuestId(id, idc);
-	 contact.setStatus(1);
-	 repoContact.save(contact);
-	 	
-	 return "redirect: /Twitter/contact/"+id+"/all";
-	 }
-	 
-	 
-	//
-	// @PostMapping("/{id}/edit")
-	// public String editUserPost(@Valid User user, @PathVariable Long id,
-	// BindingResult result, Model model) {
-	// if (result.hasErrors()) {
-	// System.out.println(result);
-	// return "editUser";
-	// }
-	// repoUser.save(user);
-	//
-	// model.addAttribute("eventType", repoEventType.findAll());
-	//
-	// if (repoUser.findOneById(id).getUserName().equals("admin")) {
-	// model.addAttribute("events", repoEvent.findAll());
-	// return "users";
-	// } else {
-	// model.addAttribute("events", repoEvent.findAllBySeriesUserId(id));
-	// return "userPanel";
-	// }
-	//
-	// }
-	//
-	// @GetMapping("/add")
-	// public String addUser(Model model) {
-	//
-	// if(!SessionValidation.isSessionAdmin()) {
-	// return "main";
-	// }
-	//
-	// User user = new User();
-	// model.addAttribute("user", user);
-	// return "signup";
-	// }
-	//
-	// @PostMapping("/add")
-	// public String addUserPost(@Valid User user, BindingResult result, Model
-	// model) {
-	// if (result.hasErrors()) {
-	// return "signup";
-	// }
-	// repoUser.save(user);
-	// model.addAttribute("user", user);
-	// model.addAttribute("users", repoUser.findAll());
-	// return "users";
-	//
-	// }
-	//
-	//
-	//
-	//
+	/**
+	 * Method that sets a status of guest user (via Contact object) with given id
+	 * (idc) to "follow" (2) for host user with given id (id)
+	 * 
+	 * @param id
+	 * @param idc
+	 * @param model
+	 * @return
+	 */
+
+	@GetMapping("/{id}/follow/{idc}")
+	public String followContact(@PathVariable Long id, @PathVariable Long idc, Model model) {
+
+		Contact contact = repoContact.findOneByHostIdAndGuestId(id, idc);
+		contact.setStatus(2);
+		repoContact.save(contact);
+
+		return "redirect: /Twitter/contact/" + id + "/all";
+	}
+
+	/**
+	 * Method that sets a status of guest user (via Contact object) with given id
+	 * (idc) to "ban" (3) for host user with given id (id)
+	 * 
+	 * @param id
+	 * @param idc
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/{id}/ban/{idc}")
+	public String banContact(@PathVariable Long id, @PathVariable Long idc, Model model) {
+
+		Contact contact = repoContact.findOneByHostIdAndGuestId(id, idc);
+		contact.setStatus(3);
+		repoContact.save(contact);
+
+		return "redirect: /Twitter/contact/" + id + "/all";
+	}
+
+	/**
+	 * Method that sets a status of guest user (via Contact object) with given id
+	 * (idc) to "not follow" (1) for host user with given id (id)
+	 * 
+	 * @param id
+	 * @param idc
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/{id}/stopFollow/{idc}")
+	public String stopFollowContact(@PathVariable Long id, @PathVariable Long idc, Model model) {
+
+		Contact contact = repoContact.findOneByHostIdAndGuestId(id, idc);
+		contact.setStatus(1);
+		repoContact.save(contact);
+
+		return "redirect: /Twitter/contact/" + id + "/all";
+	}
 
 }

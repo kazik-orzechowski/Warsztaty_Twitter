@@ -41,7 +41,14 @@ public class TweetController {
 	@Autowired
 	private CommentRepository repoComment;
 
-		@Transactional
+	/**
+	 * Method responsible for display main user screen containing 
+	 * tweet input form and list of user's own tweets
+	 * @param id
+	 * @param model
+	 * @return 
+	 */
+	@Transactional
 	@GetMapping("/{id}/add")
 	public String addTweet(@PathVariable Long id, Model model) {
 		Tweet tweet = new Tweet();
@@ -127,6 +134,7 @@ public class TweetController {
 		
 		model.addAttribute("guestTweets", followedTweets);
 		model.addAttribute("currentUser", hostUser);
+		model.addAttribute("displayNumber", idt);
 		model.addAttribute("inputDisplayNumber", idt);
 		model.addAttribute("comment", comment);
 		return "allGuestsTweets";
@@ -204,7 +212,7 @@ public class TweetController {
 		for(Contact contact : myFollowedContacts) {
 			followedUsers.add(contact.getGuest());
 		}
-			
+		followedUsers.add(repoUser.getOne(id));
 		List<Tweet> followedTweets = 
 				repoTweet.findTweetsOfUsersFollowedByMeOrderDesc(followedUsers);
 		return followedTweets;

@@ -12,16 +12,16 @@
 <%@	taglib	prefix="form"
 				uri="http://www.springframework.org/tags/form"	%>    
 
-<title>Contacts ${currentUser.username}</title>
+<title>Contacts @${currentUser.username}</title>
 </head>
 <body>
-<h2>Contacts of ${currentUser.username} </h2>
+<h2>Contacts of @${currentUser.username} </h2>
 <a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/add">Your homepage </a><br/>
 <a href="http://localhost:8080/Twitter/user/logout">Log Out</a> </p>
 <h5>Manage your contacts:</h5>
 
 <c:forEach items="${hostContacts}" var="item">
-	<p><b>${item.guestName}</b> is ${item.guestStatus} by you   
+	<p><b>@${item.guestName}</b> is ${item.guestStatus} by you   
 	<a href="http://localhost:8080/Twitter/contact/${currentUser.id}/follow/${item.guestId}" >
 	Follow</a> #
 	<a href="http://localhost:8080/Twitter/contact/${currentUser.id}/stopFollow/${item.guestId}" >
