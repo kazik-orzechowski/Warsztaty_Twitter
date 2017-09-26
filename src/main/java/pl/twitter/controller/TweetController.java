@@ -28,25 +28,47 @@ import pl.twitter.repository.ContactRepository;
 import pl.twitter.repository.TweetRepository;
 import pl.twitter.repository.UserRepository;
 
+/**
+ * Main Twitter controller responsible to process user's requests concerning tweets and comments
+ * @author kaz
+ *
+ */
+
 @Controller
 @RequestMapping("/tweet")
 public class TweetController {
 
+	/** 
+	 * Jpa repository reference to Tweet class
+	 */
 	@Autowired
 	private TweetRepository repoTweet;
+	/** 
+	 * Jpa repository reference to User class
+	 */
+
 	@Autowired
 	private UserRepository repoUser;
+	/** 
+	 * Jpa repository reference to Contact class
+	 */
+
 	@Autowired
 	private ContactRepository repoContact;
+	/** 
+	 * Jpa repository reference to Comment class
+	 */
+
 	@Autowired
 	private CommentRepository repoComment;
 
 	/**
-	 * Method responsible for display main user screen containing 
+	 * Method mapping user of given {id} request and preparing display of current user home page containing 
 	 * tweet input form and list of user's own tweets
+	 * 
 	 * @param id
 	 * @param model
-	 * @return 
+	 * @return current user home page
 	 */
 	@Transactional
 	@GetMapping("/{id}/add")
@@ -63,16 +85,30 @@ public class TweetController {
 		return "tweets";
 	}
 
+	/**
+	 * Method mapping user of given {id} input request regarding a new {tweet} including input data (tweet title and tweet text) 
+	 * validation, setting an id, a date and user for the new tweet 
+	 * 
+	 * !!!!! To be completed with saving record to database verification !!!!!
+	 * @param id
+	 * @param tweet
+	 * @param result
+	 * @param model
+	 * @return tweet input form on user home page (to be amended) or user home page with new tweet 
+	 * added to the displayed list
+	 */
+	
 	@Transactional
 	@PostMapping("/{id}/add")
-	public String addTweet2(@PathVariable Long id, @Valid Tweet tweet, BindingResult result, Model model) {
+	public String addTweet2(@PathVariable Long id, @Valid Tweet tweet, 
+			BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			System.err.println(result);
 			return "tweets";
 		}
 		Hibernate.initialize(repoUser.getOne(id).getTweets());
 		System.err.println("post" + tweet.toString());
 		tweet.setUser(repoUser.getOne(id));
-		// DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		tweet.setCreated(date);
 		if (repoTweet.findTop1ByOrderByIdDesc() == null) {
@@ -84,22 +120,49 @@ public class TweetController {
 		return "redirect: /Twitter/tweet/" + id + "/add";
 	}
 
-	@GetMapping("/{id}/delete/{tweetId}")
-	public String delTweet(@PathVariable Long id, @PathVariable Long tweetId, Model model) {
-		repoTweet.delete(tweetId);
+	/** 
+	 * Method mapping user request with given {id} concerning removal of tweet with given {idt} 
+	 * and deleting this tweet
+	 * !!!!! To be completed with saving record to database verification !!!!!
+	 * 
+	 * @param id
+	 * @param tweetId
+	 * @param model
+	 * @return user home page
+	 */
+	
+	@GetMapping("/{id}/delete/{idt}")
+	public String delTweet(@PathVariable Long id, @PathVariable Long idt, Model model) {
+		repoTweet.delete(idt);
 		return "redirect: /Twitter/tweet/" + id + "/add";
 	}
 
-	@GetMapping("/{id}/details/{tweetId}")
-	public String detailedTweet(@PathVariable Long id, @PathVariable Long tweetId, Model model) {
-		model.addAttribute("tweet", repoTweet.findOne(tweetId));
+	/**
+	 * Method mapping user with given {id} request to display details of tweet with given {idt}
+	 * @param id
+	 * @param tweetId
+	 * @param model
+	 * @return tweet datails page
+	 */
+	@GetMapping("/{id}/details/{idt}")
+	public String detailedTweet(@PathVariable Long id, @PathVariable Long idt, Model model) {
+		model.addAttribute("tweet", repoTweet.findOne(idt));
 		model.addAttribute("currentUser", repoUser.findOne(id));
 		return "tweetDetails";
 	}
+	
+	/**
+	 * Method mapping and processing of current (host) user with given {id} request to display tweets of (guest) 
+	 * user of given id {idg}
+	 * @param id
+	 * @param idc
+	 * @param model
+	 * @return page with tweets of the selected guest user 
+	 */
 	@Transactional
-	@GetMapping("/{id}/guestTweets/{idc}")
-	public String guestTweets(@PathVariable Long id, @PathVariable Long idc, Model model) {
-		User guestUser = repoUser.findOne(idc);
+	@GetMapping("/{id}/guestTweets/{idg}")
+	public String guestTweets(@PathVariable Long id, @PathVariable Long idg, Model model) {
+		User guestUser = repoUser.findOne(idg);
 		User hostUser = repoUser.findOne(id);
 		Hibernate.initialize(guestUser.getTweets());
 		model.addAttribute("guestTweets", repoTweet.findByUser(guestUser));
@@ -107,7 +170,13 @@ public class TweetController {
 		model.addAttribute("guestUser", guestUser);
 		return "guestTweets";
 	}
-
+	/**
+	 * Method mapping and processing of current (host) user with given {id} request to display tweets of 
+	 * all followed (guest) users
+	 * @param id
+	 * @param model
+	 * @return page with all tweets of all users followed by current (host) user
+	 */
 	@Transactional
 	@GetMapping("/{id}/guestTweets")
 	public String allGuestsTweets(@PathVariable Long id, Model model) {
@@ -123,6 +192,16 @@ public class TweetController {
 		return "allGuestsTweets";
 	}
 
+	/**
+	 * Method mapping current (host) user with given {id} request to post a comment
+	 * to tweet with given id {idt}
+	 * 
+	 * @param id
+	 * @param idt
+	 * @param model
+	 * @return page with all tweets of all users followed by current (host) user 
+	 * with new comment input form 
+	 */
 		
 	@Transactional
 	@GetMapping("/{id}/comment/{idt}/post")
@@ -140,11 +219,26 @@ public class TweetController {
 		return "allGuestsTweets";
 	}
 
+	/**
+	 * Method processing incl. validation of {comment} entered by user of given {id} 
+	 * to post input form regarding tweet of given id {idt}.
+ 	 * !!!!! To be completed with saving record to database verification !!!!!
+	 * 
+	 * @param id
+	 * @param idt
+	 * @param comment
+	 * @param result
+	 * @param model
+	 * @return comment input form with named errors in case of incorrect input or page with all tweets of all users followed by current (host) user 
+	 * with new comment input form 
+	 */
+	
 	@Transactional
 	@PostMapping("/{id}/comment/{idt}/post")
 	public String addCommentPost(@PathVariable Long id, @PathVariable Long idt, 
 					@Valid Comment comment, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			System.err.println(result);
 			return "allGuestsTweets";
 		}
 		Hibernate.initialize(repoUser.getOne(id).getTweets());
@@ -170,6 +264,16 @@ public class TweetController {
 		return "allGuestsTweets";
 
 	}	
+	
+	/**
+	 * Method mapping current (host) user with given {id} request to show comments
+	 * to tweet with given id {idt}
+	 * @param id
+	 * @param idt
+	 * @param model
+	 * @return page with all tweets of all users followed by current (host) user 
+	 * with all comments for tweet of given id {idt} 
+	 */
 	
 	@Transactional
 	@GetMapping("/{id}/comment/{idt}/show")
@@ -217,7 +321,5 @@ public class TweetController {
 				repoTweet.findTweetsOfUsersFollowedByMeOrderDesc(followedUsers);
 		return followedTweets;
 	}
-	
-
-	
+		
 }

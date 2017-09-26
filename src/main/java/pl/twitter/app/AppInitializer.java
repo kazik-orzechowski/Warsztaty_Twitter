@@ -8,11 +8,18 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-
+/**
+ * Twitter application initialization class
+ * @author kaz
+ *
+ */
 
 public class AppInitializer  extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-public void onStartup(ServletContext container) throws ServletException {
+	/**
+	 * Twitter startup method configuring web application context. 
+	 */
+	public void onStartup(ServletContext container) throws ServletException {
 		
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 		context.register(AppConfig.class);
@@ -22,18 +29,27 @@ public void onStartup(ServletContext container) throws ServletException {
 		servlet.addMapping("/");
 	}
 	
+	/**
+	 * Method defining root configuration classes
+	 */
 	
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Method defining AppConfig class as servlet config class 
+	 */
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 		return new	Class[]{AppConfig.class};
 	}
 
+	/**
+	 * Method defining servlet mapping 
+	 */
+	
 	@Override
 	protected String[] getServletMappings() {
 		return	new	String[]{"/"};

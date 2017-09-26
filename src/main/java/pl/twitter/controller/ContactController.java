@@ -4,16 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
-import javax.validation.Valid;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.twitter.entity.Contact;
@@ -92,17 +89,18 @@ public class ContactController {
 		model.addAttribute("currentUser", host);
 		System.err.println(host.toString());
 
-		return "contacts";
+		return "redirect: /Twitter/contact/" + id + "/all";
 	}
 
 	/**
 	 * Method that sets a status of guest user (via Contact object) with given id
-	 * (idc) to "follow" (2) for host user with given id (id)
+	 * {idc} to "follow" (value = 2) for host user with given {id} 
+	 * !!!!! To be completed with updating record in database verification !!!!!
 	 * 
 	 * @param id
 	 * @param idc
 	 * @param model
-	 * @return
+	 * @return contact page of current user
 	 */
 
 	@GetMapping("/{id}/follow/{idc}")
@@ -117,12 +115,13 @@ public class ContactController {
 
 	/**
 	 * Method that sets a status of guest user (via Contact object) with given id
-	 * (idc) to "ban" (3) for host user with given id (id)
+	 * {idc} to "ban" (value = 3) for host user with given {id} 
+	 * !!!!! To be completed with saving record to database verification !!!!!
 	 * 
 	 * @param id
 	 * @param idc
 	 * @param model
-	 * @return
+	 * @return contact page of current user
 	 */
 	@GetMapping("/{id}/ban/{idc}")
 	public String banContact(@PathVariable Long id, @PathVariable Long idc, Model model) {
@@ -136,12 +135,13 @@ public class ContactController {
 
 	/**
 	 * Method that sets a status of guest user (via Contact object) with given id
-	 * (idc) to "not follow" (1) for host user with given id (id)
+	 * {idc} to "not follow" (value = 1) for host user with given id {id} 
+	 * !!!!! To be completed with saving record to database verification !!!!!
 	 * 
 	 * @param id
 	 * @param idc
 	 * @param model
-	 * @return
+	 * @return contact page of current user
 	 */
 	@GetMapping("/{id}/stopFollow/{idc}")
 	public String stopFollowContact(@PathVariable Long id, @PathVariable Long idc, Model model) {

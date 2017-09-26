@@ -63,16 +63,16 @@ public class Contact {
 	}
 
 	/**
-	 * Getter
+	 * Gets this contact's id
 	 * 
-	 * @return unique auto generated contact id
+	 * @return this contact's id
 	 */
 	public Long getId() {
 		return id;
 	}
 
 	/**
-	 * Sets comment id
+	 * Sets the comment id
 	 * 
 	 * @param id
 	 */
@@ -82,16 +82,16 @@ public class Contact {
 	}
 
 	/**
-	 * Getter
+	 * Gets the contact status: 1 - not connected, 2 - followed, 3 - banned
 	 * 
-	 * @return contact status: 1 - not connected, 2 - followed, 3 - banned
+	 * @return contact status
 	 */
 	public int getStatus() {
 		return status;
 	}
 
 	/**
-	 * Sets contact status: 1 - not connected, 2 - followed, 3 - banned
+	 * Sets the contact status: 1 - not connected, 2 - followed, 3 - banned
 	 * 
 	 * @param status
 	 */
@@ -100,7 +100,7 @@ public class Contact {
 	}
 
 	/**
-	 * Getter
+	 * Gets the target contact user defined in this contact as guest user
 	 * 
 	 * @return target contact user defined as guest user
 	 */
@@ -109,7 +109,7 @@ public class Contact {
 	}
 
 	/**
-	 * Sets target contact user defined as guest user
+	 * Sets the target contact user defined as guest user
 	 * 
 	 * @param guest
 	 */
@@ -118,7 +118,7 @@ public class Contact {
 	}
 
 	/**
-	 * Getter
+	 * Gets the origin contact user of this contact defined as host user
 	 * 
 	 * @return origin contact user defined as host user
 	 */
@@ -127,7 +127,7 @@ public class Contact {
 	}
 
 	/**
-	 * Sets origin contact user defined as host user
+	 * Sets the origin contact user of this contact defined as host user
 	 * 
 	 * @param host
 	 */

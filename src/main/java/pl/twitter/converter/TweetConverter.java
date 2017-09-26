@@ -7,7 +7,7 @@ import pl.twitter.entity.Tweet;
 import pl.twitter.repository.TweetRepository;
 
 /**
- * Tweet converter
+ * String to Tweet class object converter
  * @author kaz
  *
  */

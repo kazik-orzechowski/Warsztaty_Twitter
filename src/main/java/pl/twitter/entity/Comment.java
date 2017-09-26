@@ -75,7 +75,7 @@ public class Comment {
 	}
 
 	/**
-	 * Getter
+	 * Gets the id of this comment 
 	 * 
 	 * @return id of this comment
 	 */
@@ -85,7 +85,7 @@ public class Comment {
 	}
 
 	/**
-	 * Sets id of this comment
+	 * Sets the id of this comment
 	 * 
 	 * @param id
 	 */
@@ -94,9 +94,9 @@ public class Comment {
 	}
 
 	/**
-	 * Getter
+	 * Gets this comment's text
 	 * 
-	 * @return this comment text
+	 * @return this comment's text
 	 */
 	public String getComment_text() {
 		return comment_text;
@@ -112,9 +112,9 @@ public class Comment {
 	}
 
 	/**
-	 * Getter
+	 * Gets the date of this comment creation 
 	 * 
-	 * @return date of this comment creation date
+	 * @return date of this comment creation 
 	 */
 	public Date getCreated() {
 		return created;
@@ -130,16 +130,16 @@ public class Comment {
 	}
 
 	/**
-	 * Getter
+	 * Gets the user that posted this comment 
 	 * 
-	 * @return User that posted this comment
+	 * @return user that posted this comment
 	 */
 	public User getUser() {
 		return user;
 	}
 
 	/**
-	 * Sets user that posted this comment
+	 * Sets the user that posted this comment
 	 * 
 	 * @param user
 	 */
@@ -148,7 +148,7 @@ public class Comment {
 	}
 
 	/**
-	 * Getter
+	 * Gets the tweet that this comment concerns
 	 * 
 	 * @return tweet that this comment concerns
 	 */
@@ -157,7 +157,7 @@ public class Comment {
 	}
 
 	/**
-	 * Sets tweet that this comment concerns
+	 * Sets the tweet that this comment concerns
 	 * 
 	 * @param tweet
 	 */

@@ -82,7 +82,7 @@ public class User {
 	private List<Contact> contactsGuest = new ArrayList<Contact>();
 
 	/**
-	 * Empty constructor
+	 * Empty User object constructor
 	 */
 	public User() {
 
@@ -113,16 +113,16 @@ public class User {
 	}
 
 	/**
-	 * Getter
+	 * Gets this user's id
 	 * 
-	 * @return this user id
+	 * @return this user's id
 	 */
 	public Long getId() {
 		return id;
 	}
 
 	/**
-	 * Sets this user id
+	 * Sets this user's id
 	 * 
 	 * @param id
 	 */
@@ -131,16 +131,16 @@ public class User {
 	}
 
 	/**
-	 * Getter
+	 * Gets the user name of this user
 	 * 
-	 * @return username of this Twitter user
+	 * @return user name of this user
 	 */
 	public String getUsername() {
 		return username;
 	}
 
 	/**
-	 * Sets unique username of this Twitter user
+	 * Sets the unique user name of this user
 	 * 
 	 * @param username
 	 */
@@ -149,20 +149,21 @@ public class User {
 	}
 
 	/**
-	 * !!!!! password to be encrypted !!!!!
-	 * Getter
+	 * !!!!! password to be encrypted !!!!! 
+	 * Gets this user's password
 	 * 
-	 * @return this user password 
+	 * @return this user's password
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * !!!!! password to be encrypted !!!!!
-	 * Sets this user password during password change process
+	 * !!!!! password to be encrypted !!!!! 
+	 * Sets this user's password during
+	 * password change process
 	 * 
-	 * @return users password 
+	 * @return users password
 	 * 
 	 */
 
@@ -171,17 +172,17 @@ public class User {
 	}
 
 	/**
-	 * !!!!! If not used, to be deleted !!!!!
+	 * !!!!! If not used, to be deleted !!!!! Gets the value of field described in
+	 * primary Twitter requirements
 	 * 
-	 * @return value of field described in primary Twitter requirements
+	 * @return boolean value of enabled
 	 */
 	public Boolean getEnabled() {
 		return enabled;
 	}
 
 	/**
-	 * !!!!! If not used, to be deleted !!!!! 
-	 * Sets value of field described in
+	 * !!!!! If not used, to be deleted !!!!! Sets the value of field described in
 	 * primary Twitter requirements
 	 * 
 	 * @param enabled
@@ -191,16 +192,16 @@ public class User {
 	}
 
 	/**
-	 * Getter
+	 * Gets the email of this user
 	 * 
-	 * @return email of Twitter user
+	 * @return email of this user
 	 */
 	public String getEmail() {
 		return email;
 	}
 
 	/**
-	 * Sets email of Twitter user
+	 * Sets the email of this user
 	 * 
 	 * @param email
 	 */
@@ -209,16 +210,16 @@ public class User {
 	}
 
 	/**
-	 * Getter
+	 * Gets the list of this user's tweets
 	 * 
-	 * @return list of user's tweets
+	 * @return list of this user's tweets
 	 */
 	public List<Tweet> getTweets() {
 		return tweets;
 	}
 
 	/**
-	 * Sets list of user's tweets
+	 * Sets the list of this user's tweets
 	 * 
 	 * @param tweets
 	 */
@@ -227,16 +228,16 @@ public class User {
 	}
 
 	/**
-	 * Getter
+	 * Gets the list of this user's comments to tweets
 	 * 
-	 * @return list of user's comments to tweets
+	 * @return list of this user's comments to tweets
 	 */
 	public List<Comment> getComment() {
 		return comment;
 	}
 
 	/**
-	 * Sets list of user's comments to tweets
+	 * Sets the list of this user's comments to tweets
 	 * 
 	 * @param comment
 	 */
@@ -245,17 +246,18 @@ public class User {
 	}
 
 	/**
-	 * Getter
+	 * Gets the list of contact objects (Contact class) where user is defined as a
+	 * host
 	 * 
-	 * @return list of contact objects (Contact class) where user is defined as a
-	 *         host
+	 * @return list of this user contacts (user = host)
 	 */
 	public List<Contact> getContactsHost() {
 		return contactsHost;
 	}
 
 	/**
-	 * Sets list of contact objects (Contact class) where user is defined as a host
+	 * Sets the list of contact objects (Contact class) where user is defined as a
+	 * host
 	 * 
 	 * @param contactsHost
 	 */
@@ -264,18 +266,18 @@ public class User {
 	}
 
 	/**
-	 * Getter
+	 * Gets the list of this user's contact objects (Contact class) where user is
+	 * defined as a guest
 	 * 
-	 * @return list of contact objects (Contact class) where user is defined as a
-	 *         guest
+	 * @return list of this user's contact (user = guest)
 	 */
 	public List<Contact> getContactsGuest() {
 		return contactsGuest;
 	}
 
 	/**
-	 * Sets Sets list of contact objects (Contact class) where user is defined as a
-	 * guest
+	 * Sets the list of this user's contact objects (Contact class) where user is
+	 * defined as a guest
 	 * 
 	 * @param contactsGuest
 	 */

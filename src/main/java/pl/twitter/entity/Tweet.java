@@ -61,7 +61,7 @@ public class Tweet {
 	private List<Comment> comment;
 
 	/**
-	 * Getter
+	 * Gets the
 	 * @return list of comments posted to this tweet by users
 	 */
 	
@@ -70,21 +70,21 @@ public class Tweet {
 	}
 	
 	/**
-	 * Sets list of comments posted to this tweet by users
+	 * Sets the list of comments posted to this tweet by users
 	 * @param comment
 	 */
 	public void setComment(List<Comment> comment) {
 		this.comment = comment;
 	}
-	/**
-	 * Getter
+	/** 
+	 * Gets the id of this tweet
 	 * @return id of this tweet
 	 */
 	public Long getId() {
 		return id;
 	}
 	/**
-	 * Sets id of this tweet
+	 * Sets the id of this tweet
 	 * @param id
 	 */
 	public void setId(Long id) {
@@ -92,7 +92,7 @@ public class Tweet {
 	}
 	
 	/**
-	 * Getter
+	 * Gets the title of this tweet
 	 * @return title of this tweet
 	 */
 	public String getTitle() {
@@ -100,50 +100,50 @@ public class Tweet {
 	}
 	
 	/**
-	 * Sets title of this tweet
+	 * Sets the title of this tweet
 	 * @param title
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 	/**
-	 * Getter
+	 * Gets the text of this tweet
 	 * @return text of this tweet
 	 */
 	public String getTweet_text() {
 		return tweet_text;
 	}
 	/**
-	 * Sets text of this tweet
+	 * Sets the text of this tweet
 	 * @param tweet_text
 	 */
 	public void setTweet_text(String tweet_text) {
 		this.tweet_text = tweet_text;
 	}
 	/**
-	 * Getter
-	 * @return this tweet date of creation
+	 * Gets this tweet's date of creation
+	 * @return this tweet's date of creation
 	 */
 	public Date getCreated() {
 		return created;
 	}
 	
 	/**
-	 * Sets date of this tweet creation
+	 * Sets the date of this tweet creation
 	 * @param created
 	 */
 	public void setCreated(Date created) {
 		this.created = created;
 	}
 	/**
-	 * Getter
+	 * Gets the user that created this tweet
 	 * @return user that created this tweet
 	 */
 	public User getUser() {
 		return user;
 	}
 	/**
-	 * Sets user that created this tweet
+	 * Sets the user that created this tweet
 	 * @param user
 	 */
 	public void setUser(User user) {

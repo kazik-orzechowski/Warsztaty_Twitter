@@ -9,15 +9,15 @@ package pl.twitter.entity;
 public class GuestDTO {
 	
 	/**
-	 * Gets guest user id
+	 * Guest user id
 	 */
 	private Long guestId;
 	/**
-	 * Gets guest user username
+	 * Guest user username
 	 */
 	private String guestName;
 	/**
-	 * Gets status value of Contact class object between host user and guest user 
+	 * Status value of Contact class object between host user and guest user 
 	 */
 	private String guestStatus;
 
@@ -43,15 +43,15 @@ public class GuestDTO {
 	}
 
 	/**
-	 * Getter
-	 * @return Id of guest user (User class) assigned to this GuestDTO object
+	 * Gets the id of the guest user (User class) assigned to this GuestDTO object
+	 * @return id of the guest user assigned to this guestDTO 
 	 */
 	public Long getGuestId() {
 		return guestId;
 	}
 
 	/**
-	 * Sets Id of guest user (User class) assigned to this GuestDTO object
+	 * Sets the Id of guest user (User class) assigned to this GuestDTO object
 	 * @param guestId
 	 */
 	public void setGuestId(Long guestId) {
@@ -59,29 +59,29 @@ public class GuestDTO {
 	}
 
 	/**
-	 * Getter
-	 * @return username of guest user (User class) assigned to this GuestDTO object
+	 * Gets the user name of guest user (User class) assigned to this GuestDTO object
+	 * @return user name of guest user
 	 */
 	public String getGuestName() {
 		return guestName;
 	}
 	/**
-	 * Sets username of guest user (User class) assigned to this GuestDTO object
+	 * Sets the user name of guest user (User class) assigned to this GuestDTO object
 	 * @param guestName
 	 */
 	public void setGuestName(String guestName) {
 		this.guestName = guestName;
 	}
 	/**
-	 * Getter
-	 * @return status of guest user set by host user in contact object (Contact class)
+	 * Gets the status of guest user set by host user in contact object (Contact class)
+	 * @return status of guest user 
 	 */
 	public String getGuestStatus() {
 		return guestStatus;
 	}
 
 	/**
-	 * Sets status of guest user defined by host user in contact object (Contact class)
+	 * Sets the status of guest user defined by host user in contact object (Contact class)
 	 * @param guestStatus
 	 */
 	public void setGuestStatus(String guestStatus) {
