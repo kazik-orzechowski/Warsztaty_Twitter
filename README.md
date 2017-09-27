@@ -17,7 +17,7 @@ To enter main page type [your server address]/Twitter in your browser.
 
 ## Built With
 
-* [Maven](https://maven.apache.org/) - Dependency Management
+* [Maven](https://maven.apache.org/)
 
 ## License
 
