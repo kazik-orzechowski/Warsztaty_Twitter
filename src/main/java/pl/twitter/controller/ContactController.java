@@ -29,14 +29,10 @@ import pl.twitter.repository.UserRepository;
 @RequestMapping("/contact")
 public class ContactController {
 
-	/**
-	 * Jpa repository reference to User class
-	 */
+	
 	@Autowired
 	UserRepository repoUser;
-	/**
-	 * Jpa repository reference to Contact class
-	 */
+
 	@Autowired
 	ContactRepository repoContact;
 
@@ -89,7 +85,7 @@ public class ContactController {
 		model.addAttribute("currentUser", host);
 		System.err.println(host.toString());
 
-		return "redirect: /Twitter/contact/" + id + "/all";
+		return "contacts";
 	}
 
 	/**

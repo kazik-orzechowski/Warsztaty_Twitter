@@ -38,27 +38,16 @@ import pl.twitter.repository.UserRepository;
 @RequestMapping("/tweet")
 public class TweetController {
 
-	/** 
-	 * Jpa repository reference to Tweet class
-	 */
+	
 	@Autowired
 	private TweetRepository repoTweet;
-	/** 
-	 * Jpa repository reference to User class
-	 */
-
+	
 	@Autowired
 	private UserRepository repoUser;
-	/** 
-	 * Jpa repository reference to Contact class
-	 */
-
+	
 	@Autowired
 	private ContactRepository repoContact;
-	/** 
-	 * Jpa repository reference to Comment class
-	 */
-
+	
 	@Autowired
 	private CommentRepository repoComment;
 
@@ -312,7 +301,7 @@ public class TweetController {
 	 */
 	private List<Tweet> defineFollowedTweets(Long id) {
 		List<Contact> myFollowedContacts = repoContact.findAllByHostIdAndStatus(id, 2);
-		List<User> followedUsers = new ArrayList<User>();
+		List<User> followedUsers = new ArrayList<>();
 		for(Contact contact : myFollowedContacts) {
 			followedUsers.add(contact.getGuest());
 		}

@@ -16,9 +16,7 @@ import pl.twitter.repository.TweetRepository;
  */
 public class ContactConverter implements Converter<String, Contact> {
 
-	/**
-	 * Jpa repository reference to Contact class
-	 */
+	
 	@Autowired
 	ContactRepository repoContact;
 

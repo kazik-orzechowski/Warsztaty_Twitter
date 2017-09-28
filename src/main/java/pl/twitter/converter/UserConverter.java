@@ -14,9 +14,7 @@ import org.springframework.core.convert.converter.Converter;
  */
 public class UserConverter implements Converter<String, User> {
 
-	/**
-	 * Jpa repository reference to User class
-	 */
+
 	@Autowired
 	UserRepository repoUser;
 

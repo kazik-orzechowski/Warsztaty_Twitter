@@ -15,9 +15,6 @@ import pl.twitter.repository.CommentRepository;
 
 public class CommentConverter implements Converter<String, Comment> {
 	
-	/**
-	 * Jpa repository reference to Comment class
-	 */
 	@Autowired
 	CommentRepository repoComment;
 	

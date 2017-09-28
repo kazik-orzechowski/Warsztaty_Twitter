@@ -32,14 +32,10 @@ import pl.twitter.entity.User;
 
 public class RegistrationAndLoginController {
 
-	/** 
-	 * Jpa repository reference to User class
-	 */
+	
 	@Autowired
 	UserRepository repoUser;
-	/** 
-	 * Jpa repository reference to Tweet class
-	 */
+	
 	@Autowired
 	TweetRepository repoTweet;
 

@@ -13,9 +13,7 @@ import pl.twitter.repository.TweetRepository;
  */
 public class TweetConverter implements Converter<String, Tweet> {
 
-	/**
-	 * Jpa repository reference to Tweet class
-	 */
+	
 	@Autowired
 	TweetRepository repoTweet;
 	

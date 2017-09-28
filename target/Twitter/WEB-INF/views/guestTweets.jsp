@@ -18,13 +18,15 @@
 <title>Tweets @${guestUser.username}</title>
 
 <body>
+<h2>Tweets of users followed by @${currentUser.username} </h2>
+
 <p><a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/add">Your homepage </a><br/>
 <a href="http://localhost:8080/Twitter/user/logout">Log Out</a> </p>
-<h5>Tweets of @${guestUser.username}</h5>
+<h5>List of tweets of @${guestUser.username}</h5>
 
 <c:forEach items="${guestTweets}" var="item">
 	<p><b>${item.title}</b><small>     ${item.created}</small><br />
-	${item.tweet_text}     <a href="http://localhost:8080/Twitter/tweet/${currentUser.id}/comment/${item.id}">Comment</a></p>
+	${item.tweet_text}</p>
 	
 </c:forEach>
 
