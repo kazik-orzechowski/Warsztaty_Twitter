@@ -1,7 +1,7 @@
 # Warsztaty_Twitter
 
-This is a Java 1.8 twitter like application that provides the main functions such as signing up, logging in, posting, viewing (in progress) and commenting (in progress) tweets, 
-sending and viewing private messages (in progress), an admin system (in progress), etc.
+This is a Java 1.8 twitter like application that provides the main functions such as signing up, logging in, posting, selecting and deselecting users, viewing tweets of followed users commenting tweets, 
+sending and viewing private messages (in progress), admin panel, etc.
 
 ## Setup
 
