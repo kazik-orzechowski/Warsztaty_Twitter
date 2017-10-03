@@ -1,3 +1,0 @@
-function goback(){
-history.back();
-}
