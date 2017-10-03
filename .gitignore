@@ -23,6 +23,7 @@ hs_err_pid*
 
 # Sonar files
 *.odt
+*.odt#
 
 # Folders
 /target
