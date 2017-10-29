@@ -41,8 +41,8 @@ public class ContactController {
 	 * users with menu that makes it possible to set guest user status and see their
 	 * tweets
 	 * 
-	 * @param id
-	 * @param model
+	 * @param id - current user id
+	 * @param model - Model class object used to pass attributes to target view
 	 * @return web page contacts.jsp
 	 */
 
@@ -93,9 +93,9 @@ public class ContactController {
 	 * {idc} to "follow" (value = 2) for host user with given {id} 
 	 * !!!!! To be completed with updating record in database verification !!!!!
 	 * 
-	 * @param id
-	 * @param idc
-	 * @param model
+	 * @param id - current (host) user id
+	 * @param model - Model class object used to pass attributes to target view
+	 * @param idc - id of target user that has been chosen by current user to be followed
 	 * @return contact page of current user
 	 */
 
@@ -110,14 +110,13 @@ public class ContactController {
 	}
 
 	/**
-	 * Method that sets a status of guest user (via Contact object) with given id
-	 * {idc} to "ban" (value = 3) for host user with given {id} 
+	 * Method that sets a status of guest user (via Contact object) with the selected id
+	 * {idc} to "ban" (value = 3) for the host user with given {id} 
 	 * !!!!! To be completed with saving record to database verification !!!!!
 	 * 
-	 * @param id
-	 * @param idc
-	 * @param model
-	 * @return contact page of current user
+	 * @param id - current user id
+	 * @param model - Model class object used to pass attributes to target view
+	 * @param idc - id of target user that has been chosen by current user to be followed	 * @return contact page of current user
 	 */
 	@GetMapping("/{id}/ban/{idc}")
 	public String banContact(@PathVariable Long id, @PathVariable Long idc, Model model) {
@@ -130,14 +129,13 @@ public class ContactController {
 	}
 
 	/**
-	 * Method that sets a status of guest user (via Contact object) with given id
-	 * {idc} to "not follow" (value = 1) for host user with given id {id} 
+	 * Method that sets a status of a guest user (via Contact object) with the selected id
+	 * {idc} to "not follow" (value = 1) for host user with the selected id {id} 
 	 * !!!!! To be completed with saving record to database verification !!!!!
 	 * 
-	 * @param id
-	 * @param idc
-	 * @param model
-	 * @return contact page of current user
+	 * @param id - current (host) user id
+	 * @param model - Model class object used to pass attributes to target view
+	 * @param idc - id of target user that has been chosen by current user to be followed	 * @return contact page of current user
 	 */
 	@GetMapping("/{id}/stopFollow/{idc}")
 	public String stopFollowContact(@PathVariable Long id, @PathVariable Long idc, Model model) {
