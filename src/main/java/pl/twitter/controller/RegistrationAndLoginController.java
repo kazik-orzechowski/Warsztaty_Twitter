@@ -50,11 +50,11 @@ public class RegistrationAndLoginController {
 	}
 
 	/**
-	 * Method used to validate user {login} and {password} passed from post form on login page
+	 * Method used to validate user login and password passed from post form on the login page
 	 * !!! To be completed with adding current user to http session !!!
 	 * 
-	 * @param login
-	 * @param password
+	 * @param login - login entered by a guest user on the login page
+	 * @param password - password entered by a guest user on the login page
 	 * @return login page when login or password are not valid, otherwise returns user home page 
 	 */
 	
@@ -84,9 +84,9 @@ public class RegistrationAndLoginController {
 	}
 
 	/**
-	 * New user sign up request mapping
+	 * Maps the new user sign up request mapping
 	 * 
-	 * @param model
+	 * @param model - Model class object used to pass attributes to target view
 	 * @return sign up page
 	 */
 	@GetMapping("/signup")
@@ -100,10 +100,10 @@ public class RegistrationAndLoginController {
 	 * New {user} sign up form mapping and sign up processing method
 	 * !!!!! To be completed with password verification (second password input field) and encryption !!!!!
 	 * 
-	 * @param user
-	 * @param result
-	 * @param model
-	 * @return signup page when login, password or email are not valid, otherwise main page
+	 * @param user - User class object binded after completion of the post form on the sign up page
+	 * @param result - binding result data
+	 * @param model - Model class object used to pass attributes to target view
+	 * @return sign up page when login, password or email are not valid, otherwise the main application's page
 	 */
 	@PostMapping("/signup")
 	public String addUserPost(@Valid User user, BindingResult result, Model model) {

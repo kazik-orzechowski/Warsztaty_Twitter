@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
 	/**
-	 * Method mapping home page of Twitter
+	 * Maps the home page of Twitter
 	 * @return
 	 */
 	@GetMapping("")
