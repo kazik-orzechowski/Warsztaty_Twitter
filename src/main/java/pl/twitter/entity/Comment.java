@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 /**
- * Entity class for comments to tweets
+ * Entity class for comments that my be posted to tweets
  * 
  * @author kaz
  *
@@ -31,13 +31,13 @@ public class Comment {
 	@Id
 	private Long id;
 	/**
-	 * Comment text min = 1, max = 400
+	 * Comment text 
 	 */
 	@NotNull
 	@Length(min = 1, max = 400)
 	private String comment_text;
 	/**
-	 * Date of this comment creation
+	 * Date of this comment's creation
 	 */
 	private Date created;
 
@@ -48,7 +48,7 @@ public class Comment {
 	private User user;
 
 	/**
-	 * Tweet that comment refers to
+	 * Tweet that this comment refers to
 	 */
 	@ManyToOne
 	private Tweet tweet;
@@ -64,8 +64,8 @@ public class Comment {
 	/**
 	 * Comment object constructor based on two fields
 	 * 
-	 * @param comment_text
-	 * @param created
+	 * @param comment_text - text of the new comment 
+	 * @param created - date of creation of the new comment
 	 */
 
 	public Comment(String comment_text, Date created) {
@@ -87,7 +87,7 @@ public class Comment {
 	/**
 	 * Sets the id of this comment
 	 * 
-	 * @param id
+	 * @param id - id of this comment
 	 */
 	public void setId(Long id) {
 		this.id = id;
@@ -105,7 +105,7 @@ public class Comment {
 	/**
 	 * Sets this comment text
 	 * 
-	 * @param comment_text
+	 * @param comment_text - text of this comment
 	 */
 	public void setComment_text(String comment_text) {
 		this.comment_text = comment_text;
@@ -123,7 +123,7 @@ public class Comment {
 	/**
 	 * Sets this comment creation date
 	 * 
-	 * @param created
+	 * @param created - date of creation of this comment
 	 */
 	public void setCreated(Date created) {
 		this.created = created;
@@ -141,7 +141,7 @@ public class Comment {
 	/**
 	 * Sets the user that posted this comment
 	 * 
-	 * @param user
+	 * @param user - user that created this comment
 	 */
 	public void setUser(User user) {
 		this.user = user;
@@ -159,7 +159,7 @@ public class Comment {
 	/**
 	 * Sets the tweet that this comment concerns
 	 * 
-	 * @param tweet
+	 * @param tweet - tweet text 
 	 */
 	public void setTweet(Tweet tweet) {
 		this.tweet = tweet;
