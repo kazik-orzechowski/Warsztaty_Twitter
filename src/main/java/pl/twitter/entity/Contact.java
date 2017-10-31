@@ -27,7 +27,7 @@ import org.hibernate.validator.constraints.Range;
 public class Contact {
 
 	/**
-	 * Comment id auto generated
+	 * Contact id auto generated
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,13 +42,13 @@ public class Contact {
 	private int status = 1;
 
 	/**
-	 * Reference to origin contact user defined as host user
+	 * Reference to user that the contact refers to defined as a host user
 	 */
 	@ManyToOne
 	private User host;
 
 	/**
-	 * Reference to target contact user defined as guest user
+	 * Reference to target contact user defined as a guest user
 	 */
 	@ManyToOne
 	private User guest;
@@ -72,9 +72,9 @@ public class Contact {
 	}
 
 	/**
-	 * Sets the comment id
+	 * Sets the id of this contact 
 	 * 
-	 * @param id
+	 * @param id - this contact id 
 	 */
 
 	public void setId(Long id) {
@@ -91,16 +91,16 @@ public class Contact {
 	}
 
 	/**
-	 * Sets the contact status: 1 - not connected, 2 - followed, 3 - banned
+	 * Sets this contact's status: 1 - not connected, 2 - followed, 3 - banned
 	 * 
-	 * @param status
+	 * @param status - status of this contact
 	 */
 	public void setStatus(int status) {
 		this.status = status;
 	}
 
 	/**
-	 * Gets the target contact user defined in this contact as guest user
+	 * Gets the target user of this contact defined as a guest user
 	 * 
 	 * @return target contact user defined as guest user
 	 */
@@ -111,7 +111,7 @@ public class Contact {
 	/**
 	 * Sets the target contact user defined as guest user
 	 * 
-	 * @param guest
+	 * @param guest - guest user of this contact
 	 */
 	public void setGuest(User guest) {
 		this.guest = guest;
@@ -129,7 +129,7 @@ public class Contact {
 	/**
 	 * Sets the origin contact user of this contact defined as host user
 	 * 
-	 * @param host
+	 * @param host - host user of this contact
 	 */
 	public void setHost(User host) {
 		this.host = host;
@@ -138,8 +138,8 @@ public class Contact {
 	/**
 	 * Constructor with two parameters, used when status is default
 	 * 
-	 * @param host
-	 * @param guest
+	 * @param host - host user of this contact
+	 * @param guest - guest user of this contact
 	 */
 	public Contact(User host, User guest) {
 		super();
@@ -151,9 +151,9 @@ public class Contact {
 	 * Constructor using three parameters, used when contact status is defined when
 	 * new contact object is being created
 	 * 
-	 * @param status
-	 * @param host
-	 * @param guest
+	 * @param status - status of this contact
+	 * @param host - host user of this contact
+	 * @param guest - guest user of this contact
 	 */
 	public Contact(int status, User host, User guest) {
 		super();
