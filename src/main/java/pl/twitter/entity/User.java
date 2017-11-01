@@ -49,8 +49,7 @@ public class User {
 	@NotEmpty
 	private String password;
 	/**
-	 * Field described in primary Twitter requirements, !!!!! If not used, to be
-	 * deleted !!!!!
+	 * !!!! Field to be used after introducing an encrypted login !!!!
 	 */
 	private Boolean enabled;
 	/**
@@ -61,22 +60,22 @@ public class User {
 	@Email
 	private String email;
 	/**
-	 * List of tweets posted by this user
+	 * List of tweets posted by the user
 	 */
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Tweet> tweets = new ArrayList<Tweet>();
 	/**
-	 * List of comments posted by this user
+	 * List of comments posted by the user
 	 */
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Comment> comment;
 	/**
-	 * List of contacts in which user is recognized as a host
+	 * List of contacts in which a user is recognized as a host
 	 */
 	@OneToMany(mappedBy = "host", cascade = CascadeType.REMOVE)
 	private List<Contact> contactsHost = new ArrayList<Contact>();
 	/**
-	 * List of contacts in which user is recognized as a guest
+	 * List of contacts in which a user is recognized as a guest
 	 */
 	@OneToMany(mappedBy = "guest", cascade = CascadeType.REMOVE)
 	private List<Contact> contactsGuest = new ArrayList<Contact>();
@@ -91,9 +90,9 @@ public class User {
 	/**
 	 * Constructor used to User creation during user registration process
 	 * 
-	 * @param username
-	 * @param password
-	 * @param email
+	 * @param username - this user's user name
+	 * @param password - this user's password
+	 * @param email - this user's e-mail address
 	 */
 	public User(String username, String password, String email) {
 		super();
@@ -124,7 +123,7 @@ public class User {
 	/**
 	 * Sets this user's id
 	 * 
-	 * @param id
+	 * @param id - this user's id
 	 */
 	public void setId(Long id) {
 		this.id = id;
@@ -142,7 +141,7 @@ public class User {
 	/**
 	 * Sets the unique user name of this user
 	 * 
-	 * @param username
+	 * @param username - this user's user name
 	 */
 	public void setUsername(String username) {
 		this.username = username;
@@ -172,8 +171,7 @@ public class User {
 	}
 
 	/**
-	 * !!!!! If not used, to be deleted !!!!! Gets the value of field described in
-	 * primary Twitter requirements
+	 * !!!!! To be used to mark user that is logged in !!!!! 
 	 * 
 	 * @return boolean value of enabled
 	 */
@@ -182,8 +180,7 @@ public class User {
 	}
 
 	/**
-	 * !!!!! If not used, to be deleted !!!!! Sets the value of field described in
-	 * primary Twitter requirements
+	 * !!!!! To be used to mark user that is logged in !!!!! 
 	 * 
 	 * @param enabled
 	 */
@@ -203,7 +200,7 @@ public class User {
 	/**
 	 * Sets the email of this user
 	 * 
-	 * @param email
+	 * @param email - this user's e-mail address
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -221,7 +218,7 @@ public class User {
 	/**
 	 * Sets the list of this user's tweets
 	 * 
-	 * @param tweets
+	 * @param tweets - this user's tweets
 	 */
 	public void setTweets(List<Tweet> tweets) {
 		this.tweets = tweets;
@@ -239,7 +236,7 @@ public class User {
 	/**
 	 * Sets the list of this user's comments to tweets
 	 * 
-	 * @param comment
+	 * @param comment - this user's comment
 	 */
 	public void setComment(List<Comment> comment) {
 		this.comment = comment;
@@ -259,7 +256,7 @@ public class User {
 	 * Sets the list of contact objects (Contact class) where user is defined as a
 	 * host
 	 * 
-	 * @param contactsHost
+	 * @param contactsHost - this user contacts, where user acts as a host
 	 */
 	public void setContactsHost(List<Contact> contactsHost) {
 		this.contactsHost = contactsHost;
@@ -279,7 +276,7 @@ public class User {
 	 * Sets the list of this user's contact objects (Contact class) where user is
 	 * defined as a guest
 	 * 
-	 * @param contactsGuest
+	 * @param contactsGuest - this user's contacts where user acts as a guest
 	 */
 	public void setContactsGuest(List<Contact> contactsGuest) {
 		this.contactsGuest = contactsGuest;
