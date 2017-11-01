@@ -19,7 +19,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * Entity class that serves to create and modification of tweets posted by users
+ * Entity class that serves to create and modify tweets posted by users
  * @author kaz
  *
  */
@@ -29,24 +29,24 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Tweet {
 
 	/**
-	 * Tweet id generated during adding new tweets (TweetController)
+	 * Tweet's id is generated during adding new tweets (in the TweetController)
 	 */
 	@Id
 	private Long id;
 	/**
-	 * Tweet title
+	 * Tweet's title
 	 */
 	@NotNull 
 	@Length(min = 5, max = 50) 
 	private String title;
 	/**
-	 * Tweet text
+	 * Tweet's text
 	 */
 	@NotNull
 	@Length(min=1, max=160)
 	private String tweet_text;
 	/**
-	 * Tweet creation date
+	 * Tweet's creation date
 	 */
 	private Date created;
 	/**
@@ -55,13 +55,13 @@ public class Tweet {
 	@ManyToOne
 	private User user;
 	/**
-	 * List of comments posted to this tweets by users
+	 * List of comments posted to the tweet by users
 	 */
 	@OneToMany (mappedBy = "tweet",  cascade=CascadeType.ALL)
 	private List<Comment> comment;
 
 	/**
-	 * Gets the
+	 * Gets the list of comments posted to this tweet
 	 * @return list of comments posted to this tweet by users
 	 */
 	
@@ -71,7 +71,7 @@ public class Tweet {
 	
 	/**
 	 * Sets the list of comments posted to this tweet by users
-	 * @param comment
+	 * @param comment - list of comments
 	 */
 	public void setComment(List<Comment> comment) {
 		this.comment = comment;
@@ -85,7 +85,7 @@ public class Tweet {
 	}
 	/**
 	 * Sets the id of this tweet
-	 * @param id
+	 * @param id - id of this tweet
 	 */
 	public void setId(Long id) {
 		this.id = id;
@@ -101,7 +101,7 @@ public class Tweet {
 	
 	/**
 	 * Sets the title of this tweet
-	 * @param title
+	 * @param title - title of this tweet
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -115,7 +115,7 @@ public class Tweet {
 	}
 	/**
 	 * Sets the text of this tweet
-	 * @param tweet_text
+	 * @param tweet_text - text of this tweet
 	 */
 	public void setTweet_text(String tweet_text) {
 		this.tweet_text = tweet_text;
@@ -130,7 +130,7 @@ public class Tweet {
 	
 	/**
 	 * Sets the date of this tweet creation
-	 * @param created
+	 * @param created - date of creation of this tweet
 	 */
 	public void setCreated(Date created) {
 		this.created = created;
@@ -144,17 +144,17 @@ public class Tweet {
 	}
 	/**
 	 * Sets the user that created this tweet
-	 * @param user
+	 * @param user - user of this tweet
 	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
 	/**
 	 * Constructor using four parameters to define new tweet
-	 * @param title
-	 * @param tweet_text
-	 * @param created
-	 * @param user
+	 * @param title - title of the tweet
+	 * @param tweet_text - tesxt of the tweet
+	 * @param created - date of creation of the tweet
+	 * @param user - user that created the tweet
 	 */
 	public Tweet(String title, String tweet_text, Date created, User user) {
 		super();
@@ -173,7 +173,7 @@ public class Tweet {
 	}
 	
 	/**
-	 * Empty constructor of new tweet
+	 * Empty constructor of the new tweet
 	 */
 	public Tweet() {
 		
