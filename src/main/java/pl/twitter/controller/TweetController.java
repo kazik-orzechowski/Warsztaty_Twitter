@@ -105,7 +105,6 @@ public class TweetController {
 			return "tweets";
 		}
 		Hibernate.initialize(repoUser.getOne(id).getTweets());
-		System.err.println("post" + tweet.toString());
 		tweet.setUser(repoUser.getOne(id));
 		Date date = new Date();
 		tweet.setCreated(date);
