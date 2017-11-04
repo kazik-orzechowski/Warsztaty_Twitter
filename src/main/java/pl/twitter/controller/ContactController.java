@@ -83,7 +83,6 @@ public class ContactController {
 
 		model.addAttribute("hostContacts", guestsData);
 		model.addAttribute("currentUser", host);
-		System.err.println(host.toString());
 
 		return "contacts";
 	}
